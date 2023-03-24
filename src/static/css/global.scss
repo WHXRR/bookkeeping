@@ -1,0 +1,54 @@
+body {
+	box-sizing: border-box;
+}
+.flex {
+	display: flex;
+}
+.flex-column {
+	flex-direction: column;
+}
+.a-center {
+	align-items: center;
+}
+.j-center {
+	justify-content: center;
+}
+.j-s-b {
+	justify-content: space-between;
+}
+.j-end {
+	justify-content: flex-end;
+}
+.font-bold {
+	font-weight: bold;
+}
+.small-size {
+	font-size: 14px;
+}
+.p-10 {
+	padding: 10px;
+}
+.p-t-5 {
+	padding-top: 5px;
+}
+.p-r-5 {
+	padding-right: 5px;
+}
+.p-t-10 {
+	padding-top: 10px;
+}
+.p-r-10 {
+	padding-right: 10px;
+}
+.primary-color {
+	color: $primary-color;
+}
+.shallow-black-color {
+	color: $shallow-black-color;
+}
+.red-color {
+	color: $red-color;
+}
+.green-color {
+	color: $green-color;
+}

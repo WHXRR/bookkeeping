@@ -1,0 +1,45 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index"
+		},
+		{
+			"path": "pages/center/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/add_bill/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "小王记账",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#e6e6e6",
+		"selectedColor": "#fba8a4",
+		"backgroundColor": "#fcfcfc",
+		"borderStyle": "white",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home1-selected.png"
+			},
+			{
+				"pagePath": "pages/center/index",
+				"text": "个人中心",
+				"iconPath": "static/images/person.png",
+				"selectedIconPath": "static/images/person-selected.png"
+			}
+		]
+	}
+}
