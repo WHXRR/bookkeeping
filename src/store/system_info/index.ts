@@ -6,7 +6,7 @@ export const systemInfo = defineStore('systemInfo', {
 	}),
 	actions: {
 		getSystemBarHeight() {
-			this.barHeight = uni.getSystemInfoSync().statusBarHeight
+			this.barHeight = uni.getSystemInfoSync().statusBarHeight || 0
 		},
 	},
 });

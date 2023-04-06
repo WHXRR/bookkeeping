@@ -8,7 +8,7 @@
 <template>
 	<view class="number-box">
 		<block v-for="(myIndex, index) in indexArr" :key="index">
-			<swiper class="swiper" :duration="800" vertical="true" :current="myIndex" circular="true" v-bind:style="{color:color,width:myIndex == 10 ? '7px' : width+'px',height:height+'px',lineHeight:fontSize+'px',fontSize:fontSize+'px'}">
+			<swiper class="swiper" :duration="1000" vertical="true" :current="myIndex" circular="true" v-bind:style="{color:color,width:myIndex == 10 ? '7px' : width+'px',height:height+'px',lineHeight:fontSize+'px',fontSize:fontSize+'px'}">
 				<swiper-item>
 					<view class="swiper-item">0</view>
 				</swiper-item>

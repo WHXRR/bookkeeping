@@ -31,11 +31,12 @@
 
 <script setup lang="ts">
 	import CircleIcon from '@/components/circle_icon.vue'
+	import api from '@/api'
 	import { watchEffect, ref, computed } from "vue"
 
-	const props = defineProps(['modelValue', 'addType'])
+	const props = defineProps(['modelValue', 'addType', 'iconSelected', 'subIconSelected', 'current'])
 	const emit = defineEmits(['update:modelValue', 'addSuccess'])
-	const popup = ref < any > (null)
+	const popup = ref<any>(null)
 	watchEffect(() => {
 		if (props.modelValue) {
 			popup.value.open()
@@ -46,13 +47,46 @@
 		emit('update:modelValue', false)
 	}
 
+	watchEffect(() => {
+		if (props.addType === 3) {
+			iconText.value = props.iconSelected.name
+		} else if (props.addType === 4) {
+			iconText.value = props.subIconSelected.name
+		}
+	})
 	const text = computed(() => iconText.value[0])
-	const iconText = ref < string > ('')
-	const dialogConfirm = () => {
+	const iconText = ref<string>('')
+	const dialogConfirm = async () => {
 		if (!iconText.value) return
-		emit('addSuccess', iconText.value)
-		iconText.value = ''
-		close()
+		let res = {}
+		if (!props.current) {
+			if (props.addType === 1) {
+				res = await api.addParentClassification({ name: iconText.value })
+			} else if (props.addType === 2) {
+				res = await api.addChildClassification({ name: iconText.value, parent_id: props.iconSelected.id })
+			} else if (props.addType === 3) {
+				res = await api.updateParentClassification({ id: props.iconSelected.id, name: iconText.value })
+			} else if (props.addType === 4) {
+				res = await api.updateChildClassification({ id: props.subIconSelected.id, name: iconText.value, parent_id: props.subIconSelected.parent_id })
+			}
+		} else {
+			if (props.addType === 1) {
+				res = await api.addIncomeParentClassification({ name: iconText.value })
+			} else if (props.addType === 2) {
+				res = await api.addIncomeChildClassification({ name: iconText.value, parent_id: props.iconSelected.id })
+			} else if (props.addType === 3) {
+				res = await api.updateIncomeParentClassification({ id: props.iconSelected.id, name: iconText.value })
+			} else if (props.addType === 4) {
+				res = await api.updateIncomeChildClassification({ id: props.subIconSelected.id, name: iconText.value, parent_id: props.subIconSelected.parent_id })
+			}
+		}
+		if (res.status) {
+			setTimeout(() => {
+				emit('addSuccess')
+				iconText.value = ''
+				close()
+			}, 500)
+		}
 	}
 </script>
 

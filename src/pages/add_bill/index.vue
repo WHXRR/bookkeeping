@@ -1,5 +1,5 @@
 <template>
-	<view class="add-bill" :style="{paddingTop: barHeight + 20 + 'px'}">
+	<view class="add-bill" :style="{paddingTop: barHeight + 'px'}">
 		<BackIcon />
 		<uni-segmented-control
 			:current="current"
@@ -8,10 +8,10 @@
 			active-color="#fba8a4"
 			@clickItem="onClickItem" />
 		<view v-if="current === 0">
-			<Pay />
+			<Pay :current="current" :selectedBill="selectedBill" />
 		</view>
 		<view v-if="current === 1">
-			<Pay />
+			<Pay :current="current" :selectedBill="selectedBill" />
 		</view>
 	</view>
 </template>
@@ -21,6 +21,7 @@
 	import Pay from './components/pay.vue'
 	import { systemInfo } from '@/store/system_info';
 	import { ref } from 'vue';
+	import { onLoad } from '@dcloudio/uni-app';
 	const { barHeight } = systemInfo();
 	const current = ref(0)
 	const items = ['支出', '收入']
@@ -29,6 +30,14 @@
 			current.value = e.currentIndex
 		}
 	}
+
+	const selectedBill = ref<number>(0)
+	onLoad((options) => {
+		if (options.billType) {
+			current.value = Number(options.billType) || 0
+		}
+		selectedBill.value = Number(options.selectedBill) || 0
+	})
 </script>
 
 <style lang="scss">
